@@ -4,7 +4,11 @@
       "WebFetch(domain:api.anthropic.com)",
       "Bash(cp webfetch-1777196734480-kpsi2a.bin design.tar.gz)",
       "Bash(tar -tzf design.tar.gz)",
-      "Bash(gunzip -c webfetch-1777196734480-kpsi2a.bin)"
+      "Bash(gunzip -c webfetch-1777196734480-kpsi2a.bin)",
+      "Bash(git remote *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push *)"
     ]
   }
 }
