@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KAOS VINTAGE — Untuk yang tau nilainya.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0a;
+      --bg2: #111111;
+      --fg: #e8e4dc;
+      --fg-muted: #7a766e;
+      --fg-dim: #3a3832;
+      --accent: #e8e4dc;
+      --red: #7a1a1a;
+      --border: rgba(232,228,220,0.1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── GRAIN OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 180px;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 64px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .nav-logo {
+      white-space: nowrap;
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 18px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--fg);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--fg-muted);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--fg); }
+
+    .nav-cta {
+      border: 1px solid rgba(232,228,220,0.4);
+      color: var(--fg);
+      background: transparent;
+      padding: 8px 20px;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+
+    .nav-cta:hover {
+      background: var(--fg);
+      color: var(--bg);
+    }
+
+    /* ── HERO ── */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 120px 48px 80px;
+      overflow: hidden;
+      align-items: flex-start;
+    }
+
+    /* crowd silhouette watermark */
+    #hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 55%;
+      pointer-events: none;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 400' preserveAspectRatio='xMidYMax slice'%3E%3Cpath fill='%23e8e4dc' fill-opacity='0.03' d='M0,400 L0,280 C20,260 35,240 55,250 C75,260 80,285 100,280 C115,276 120,255 140,250 C155,246 165,260 185,265 C200,269 210,258 230,252 C248,246 255,250 275,255 C290,259 300,268 320,265 C338,262 345,248 365,242 C382,237 392,248 412,252 C430,256 438,250 458,244 C476,238 485,230 505,235 C522,240 530,258 550,262 C568,266 578,255 598,248 C616,242 625,238 645,242 C663,246 672,260 692,264 C710,268 720,258 740,252 C758,246 768,240 788,244 C806,248 815,260 835,264 C852,268 862,258 882,252 C900,246 910,242 930,248 C948,254 955,268 975,270 C992,272 1002,260 1022,255 C1040,250 1048,248 1068,252 C1086,256 1095,266 1115,268 C1132,270 1142,260 1162,255 C1180,250 1190,248 1210,254 C1228,260 1235,274 1255,276 C1272,278 1282,266 1302,260 C1320,254 1330,252 1350,258 C1368,264 1376,278 1396,280 C1414,282 1424,272 1440,268 L1440,400 Z'/%3E%3C/svg%3E") no-repeat bottom center / cover;
+    }
+
+    /* hero grain */
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 50%, rgba(232,228,220,0.015) 0%, transparent 70%),
+        radial-gradient(ellipse 100% 50% at 50% 100%, rgba(10,10,10,0.8) 0%, transparent 60%);
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--fg-muted);
+      margin-bottom: 28px;
+    }
+
+    .hero-h1 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: clamp(56px, 9vw, 130px);
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      color: var(--fg);
+      max-width: 900px;
+      margin-bottom: 36px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-h1 em {
+      font-style: italic;
+      color: rgba(232,228,220,0.5);
+    }
+
+    .hero-sub {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--fg-muted);
+      max-width: 520px;
+      line-height: 1.75;
+      margin-bottom: 52px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-sub strong {
+      color: rgba(232,228,220,0.7);
+      font-weight: 500;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--fg);
+      color: var(--bg);
+      padding: 16px 36px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: opacity 0.2s, transform 0.2s;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    .btn-primary .arrow {
+      display: inline-block;
+      transition: transform 0.2s;
+    }
+
+    .btn-primary:hover .arrow { transform: translateX(4px); }
+
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 36px;
+      left: 48px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--fg-dim);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      z-index: 1;
+    }
+
+    .hero-scroll-hint::before {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: var(--fg-dim);
+    }
+
+    /* ── MARQUEE ── */
+    .marquee-wrap {
+      background: #0f0f0f;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+      padding: 16px 0;
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 0;
+      animation: marquee 35s linear infinite;
+      white-space: nowrap;
+    }
+
+    .marquee-item {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--fg-muted);
+      padding: 0 36px;
+      flex-shrink: 0;
+    }
+
+    .marquee-item .dot {
+      color: var(--fg-dim);
+      margin-left: 36px;
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ── SECTION SHARED ── */
+    section {
+      padding: 120px 48px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--fg-muted);
+      margin-bottom: 60px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--fg-dim);
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      background: #0d0d0d;
+      border-top: 1px solid var(--border);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 2fr 3fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .about-headline {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: clamp(36px, 4vw, 56px);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      color: var(--fg);
+    }
+
+    .about-headline em {
+      display: block;
+      font-style: italic;
+      color: rgba(232,228,220,0.45);
+    }
+
+    .about-body {
+      padding-top: 8px;
+    }
+
+    .about-body p {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--fg-muted);
+      line-height: 1.85;
+      margin-bottom: 20px;
+    }
+
+    .about-body p:last-child { margin-bottom: 0; }
+
+    .about-body strong {
+      color: var(--fg);
+      font-weight: 500;
+    }
+
+    /* ── DROPS ── */
+    #drops {
+      background: var(--bg);
+    }
+
+    .drops-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 48px;
+    }
+
+    .drops-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 40px;
+      letter-spacing: -0.01em;
+    }
+
+    .drops-link {
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--fg-muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--fg-dim);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .drops-link:hover { color: var(--fg); border-color: var(--fg-muted); }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .product-card {
+      background: #0f0f0f;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: border-color 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-card:hover {
+      border-color: rgba(232,228,220,0.25);
+    }
+
+    .product-card:hover .product-img-inner {
+      transform: scale(1.03);
+      filter: brightness(1.08);
+    }
+
+    .product-img {
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      position: relative;
+      background: #141414;
+    }
+
+    .product-img-inner {
+      width: 100%;
+      height: 100%;
+      transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.5s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .product-img-inner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .badge-1pc {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: var(--red);
+      color: #e8c0c0;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+    }
+
+    .product-info {
+      padding: 20px 22px 22px;
+    }
+
+    .product-band {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--fg-muted);
+      margin-bottom: 6px;
+    }
+
+    .product-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1.3;
+      color: var(--fg);
+      margin-bottom: 12px;
+    }
+
+    .product-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .product-price {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--fg);
+      letter-spacing: 0.02em;
+    }
+
+    .product-dm {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--fg-muted);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 1px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .product-dm:hover {
+      color: var(--fg);
+      border-color: var(--fg-muted);
+    }
+
+    /* ── TRUST ── */
+    #trust {
+      background: #0d0d0d;
+      border-top: 1px solid var(--border);
+    }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      border: 1px solid var(--border);
+    }
+
+    .trust-item {
+      padding: 52px 44px;
+      border-right: 1px solid var(--border);
+    }
+
+    .trust-item:last-child { border-right: none; }
+
+    .trust-icon {
+      width: 32px;
+      height: 32px;
+      margin-bottom: 24px;
+      opacity: 0.5;
+    }
+
+    .trust-title {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--fg);
+      margin-bottom: 16px;
+    }
+
+    .trust-body {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--fg-muted);
+      line-height: 1.75;
+    }
+
+    /* ── INSTAGRAM ── */
+    #instagram {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+    }
+
+    .ig-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .ig-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .ig-handle {
+      font-size: 13px;
+      color: var(--fg-muted);
+      letter-spacing: 0.05em;
+    }
+
+    .ig-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 2px;
+      margin-bottom: 36px;
+    }
+
+    .ig-post {
+      aspect-ratio: 1;
+      background: repeating-linear-gradient(
+        -45deg,
+        #0f0f0f 0px,
+        #0f0f0f 14px,
+        #111111 14px,
+        #111111 28px
+      );
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .ig-post:hover { opacity: 0.75; }
+
+    .ig-post-inner {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inter', monospace;
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      color: rgba(232,228,220,0.1);
+      text-transform: uppercase;
+      text-align: center;
+      padding: 8px;
+    }
+
+    .ig-cta-wrap {
+      text-align: center;
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(232,228,220,0.25);
+      color: var(--fg-muted);
+      background: transparent;
+      padding: 12px 32px;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-outline:hover {
+      border-color: rgba(232,228,220,0.5);
+      color: var(--fg);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #080808;
+      border-top: 1px solid var(--border);
+      padding: 64px 48px 40px;
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 60px;
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 24px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--fg);
+      margin-bottom: 8px;
+    }
+
+    .footer-tagline {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--fg-muted);
+      font-style: italic;
+      letter-spacing: 0.05em;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-end;
+    }
+
+    .footer-links a {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--fg-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--fg); }
+
+    .footer-contact {
+      font-size: 12px;
+      color: var(--fg-muted);
+      margin-top: 12px;
+      text-align: right;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-disclaimer {
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--fg-dim);
+      letter-spacing: 0.04em;
+    }
+
+    .footer-copy {
+      font-size: 11px;
+      color: var(--fg-dim);
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+
+      #hero { padding: 100px 24px 64px; }
+      .hero-scroll-hint { left: 24px; }
+
+      section { padding: 72px 24px; }
+
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+
+      .product-grid { grid-template-columns: repeat(2, 1fr); }
+
+      .trust-grid { grid-template-columns: 1fr; }
+      .trust-item { border-right: none; border-bottom: 1px solid var(--border); }
+      .trust-item:last-child { border-bottom: none; }
+
+      .ig-grid { grid-template-columns: repeat(3, 1fr); }
+
+      .drops-header { flex-direction: column; gap: 16px; }
+
+      footer { padding: 48px 24px 32px; }
+      .footer-top { flex-direction: column; gap: 32px; }
+      .footer-links { align-items: flex-start; }
+      .footer-contact { text-align: left; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    }
+
+    @media (max-width: 480px) {
+      .product-grid { grid-template-columns: 1fr; }
+      .ig-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ── SCROLL FADE IN ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a href="#hero" class="nav-logo">Kaos Vintage</a>
+    <ul class="nav-links">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#drops">Latest Drop</a></li>
+      <li><a href="#instagram">Contact</a></li>
+    </ul>
+    <a href="https://instagram.com/kaosvintage.online" target="_blank" class="nav-cta">DM untuk ambil kaosnya</a>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-eyebrow">Jakarta · Since 2020 · Vintage Only</div>
+    <h1 class="hero-h1">Bukan kaos.<br /><em>Artefak.</em></h1>
+    <p class="hero-sub">
+      Koleksi vintage band tees original dari era yang tidak bisa diulang.<br />
+      <strong>Oasis. Radiohead. The Smiths.</strong> Dan lainnya.
+    </p>
+    <a href="#drops" class="btn-primary">
+      Lihat Koleksi <span class="arrow">→</span>
+    </a>
+    <div class="hero-scroll-hint">Scroll</div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee-track" id="marquee-track">
+      <!-- duplicated for seamless loop -->
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-label">Tentang Kami</div>
+    <div class="about-grid">
+      <div>
+        <h2 class="about-headline fade-in">
+          Ada Era yang<br />Tidak Bisa<br /><em>Kembali.</em>
+        </h2>
+      </div>
+      <div class="about-body fade-in">
+        <p>1994. Somewhere di Manchester, seseorang memakai kaos ini untuk pertama kalinya. Mereka tidak tahu bahwa tiga puluh tahun kemudian, kaos itu masih ada.</p>
+
+        <p>Lo masih ingat pertama kali dengerin mereka? Bukan lewat algoritma. Tapi karena temen nongkrong lo bilang, <em>"Lo harus dengerin ini."</em></p>
+
+        <p>Atau mungkin lo ingat persis moment ini. Waktu MTV masih muter Oasis jam 11 malam. Waktu lo duduk sendiri di depan TV dan tiba-tiba ngerasa ada musik yang akhirnya ngerti lo.</p>
+
+        <p>Waktu seseorang memutuskan untuk beli gitar pertamanya. Bukan karena mau tampil di atas panggung. Tapi karena rasanya tidak cukup hanya dengerin saja, dia mau jadi bagian dari lagu itu.</p>
+
+        <p>Era itu sudah pergi. Konsernya sudah selesai. Beberapa bandnya bahkan sudah bubar. Tapi ada yang tersisa. Kaos-kaos ini pernah ada di sana. Di malam yang tidak bisa diulang.</p>
+
+        <p><strong>Kami tidak jual kain.<br />Kami jaga yang tersisa dari era itu.</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DROPS -->
+  <section id="drops">
+    <div class="drops-header fade-in">
+      <h2 class="drops-title">Latest Drops</h2>
+      <a href="https://instagram.com/kaosvintage.online" target="_blank" class="drops-link">Lihat semua →</a>
+    </div>
+    <div class="product-grid">
+
+      <div class="product-card fade-in">
+        <div class="product-img">
+          <div class="product-img-inner">
+            <img src="uploads/1. kaos_ride_shoegaze_sight_of_yo_1776876545_4c922b44 copy-050854b7.jpeg" alt="Ride Shoegaze Sight of You" />
+          </div>
+          <div class="badge-1pc">1 pcs only</div>
+        </div>
+        <div class="product-info">
+          <div class="product-band">Oasis</div>
+          <div class="product-name">Supersonic Japan Official</div>
+          <div class="product-footer">
+            <div class="product-price">Rp 899.000</div>
+            <a href="https://instagram.com/kaosvintage.online" target="_blank" class="product-dm">DM for info</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card fade-in">
+        <div class="product-img">
+          <div class="product-img-inner">
+            <img src="uploads/2. kaos_the_smiths_y2k_not_oasis__1763213130_c1877045 copy-d85acd47.jpg" alt="The Smiths Y2K" />
+          </div>
+          <div class="badge-1pc">1 pcs only</div>
+        </div>
+        <div class="product-info">
+          <div class="product-band">The Smiths</div>
+          <div class="product-name">Y2K Original</div>
+          <div class="product-footer">
+            <div class="product-price">Rp 1.250.000</div>
+            <a href="https://instagram.com/kaosvintage.online" target="_blank" class="product-dm">DM for info</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card fade-in">
+        <div class="product-img">
+          <div class="product-img-inner">
+            <img src="uploads/3. kaos_oasis_supersonic_x_adam_e_1776946724_785dea41_progressive copy-c689630c.jpeg" alt="Oasis Supersonic Japan Official" />
+          </div>
+          <div class="badge-1pc">1 pcs only</div>
+        </div>
+        <div class="product-info">
+          <div class="product-band">Ride</div>
+          <div class="product-name">Shoegaze Sight of You</div>
+          <div class="product-footer">
+            <div class="product-price">Rp 2.000.000</div>
+            <a href="https://instagram.com/kaosvintage.online" target="_blank" class="product-dm">DM for info</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card fade-in">
+        <div class="product-img">
+          <div class="product-img-inner">
+            <img src="uploads/4. kaos_spiritualized_spacemen_3__1776866433_80669670 copy-065d076e.jpeg" alt="Spiritualized Space Men" />
+          </div>
+          <div class="badge-1pc">1 pcs only</div>
+        </div>
+        <div class="product-info">
+          <div class="product-band">Radiohead</div>
+          <div class="product-name">Creep Y2K</div>
+          <div class="product-footer">
+            <div class="product-price">Rp 499.000</div>
+            <a href="https://instagram.com/kaosvintage.online" target="_blank" class="product-dm">DM for info</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card fade-in">
+        <div class="product-img">
+          <div class="product-img-inner">
+            <img src="uploads/5. kaos_deftones_white_pony_video_1777014371_d86c53b9 copy-d16d6eb5.jpeg" alt="Deftones White Pony" />
+          </div>
+          <div class="badge-1pc">1 pcs only</div>
+        </div>
+        <div class="product-info">
+          <div class="product-band">Spiritualized</div>
+          <div class="product-name">Space Men</div>
+          <div class="product-footer">
+            <div class="product-price">Rp 1.200.000</div>
+            <a href="https://instagram.com/kaosvintage.online" target="_blank" class="product-dm">DM for info</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card fade-in">
+        <div class="product-img">
+          <div class="product-img-inner">
+            <img src="uploads/6. kaos_the_smiths_official_the_q_1757079092_311c83cd copy-d9832098.jpeg" alt="The Smiths Official The Queen Is Dead" />
+          </div>
+          <div class="badge-1pc">1 pcs only</div>
+        </div>
+        <div class="product-info">
+          <div class="product-band">Deftones</div>
+          <div class="product-name">White Pony</div>
+          <div class="product-footer">
+            <div class="product-price">Rp 800.000</div>
+            <a href="https://instagram.com/kaosvintage.online" target="_blank" class="product-dm">DM for info</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TRUST -->
+  <section id="trust">
+    <div class="section-label">Kenapa Beli di Sini</div>
+    <div class="trust-grid">
+      <div class="trust-item fade-in">
+        <svg class="trust-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="4" width="24" height="24" stroke="#e8e4dc" stroke-width="1.5"/>
+          <path d="M10 16l4 4 8-8" stroke="#e8e4dc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="trust-title">Original Only</div>
+        <div class="trust-body">Kami beli, kami cek, kami listing. Tidak ada yang lolos tanpa verifikasi langsung.</div>
+      </div>
+      <div class="trust-item fade-in">
+        <svg class="trust-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="16" cy="16" r="11" stroke="#e8e4dc" stroke-width="1.5"/>
+          <path d="M16 10v6l4 2" stroke="#e8e4dc" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="trust-title">1 Pcs Only</div>
+        <div class="trust-body">Semua item limited. Kalau lo suka, jangan tunggu. Stok tidak akan kembali.</div>
+      </div>
+      <div class="trust-item fade-in">
+        <svg class="trust-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16 6c-5 0-9 4-9 9 0 3 2 6 5 8l3 3 3-3c3-2 5-5 5-8 0-5-4-9-7-9z" stroke="#e8e4dc" stroke-width="1.5"/>
+        </svg>
+        <div class="trust-title">Kolektor to Kolektor</div>
+        <div class="trust-body">Kami adalah fans, bukan reseller. Kami ngerti kenapa ini penting.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTAGRAM -->
+  <section id="instagram">
+    <div class="ig-header fade-in">
+      <h2 class="ig-title">Follow @kaosvintage.online</h2>
+      <p class="ig-handle">Update drop terbaru, behind the scenes, dan koleksi baru setiap minggu.</p>
+    </div>
+    <div class="ig-grid">
+      <div class="ig-post fade-in"><img src="uploads/07. kaos_portishead_glory_box_beth_1776972641_1f42e767 copy.jpeg" alt="Portishead" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
+      <div class="ig-post fade-in"><img src="uploads/08. kaos_weezer_blue_album_size_me_1776865978_907cc586 copy.jpeg" alt="Weezer" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
+      <div class="ig-post fade-in"><img src="uploads/09. kaos_gorillaz_demon_days_fit_s_1777014663_5f4d0f19 copy.jpeg" alt="Gorillaz" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
+      <div class="ig-post fade-in"><img src="uploads/10. kaos_the_smiths_y2k_not_oasis__1763213130_c1877045 copy.jpg" alt="The Smiths" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
+      <div class="ig-post fade-in"><img src="uploads/11. kaos_teenage_fanclub_shirt_med_1776866085_b0155f1b copy.jpeg" alt="Teenage Fanclub" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
+      <div class="ig-post fade-in"><img src="uploads/12. kaos_oasis_wonderwall_shirt_me_1776865848_c8e18fe2 copy.jpeg" alt="Oasis Wonderwall" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
+    </div>
+    <div class="ig-cta-wrap fade-in">
+      <a href="https://instagram.com/kaosvintage.online" target="_blank" class="btn-outline">
+        Follow untuk update drop terbaru →
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">Kaos Vintage</div>
+        <div class="footer-tagline">Untuk yang tau nilainya.</div>
+      </div>
+      <div>
+        <div class="footer-links">
+          <a href="https://www.instagram.com/kaosvintage.online/" target="_blank" style="display:flex;align-items:center;gap:10px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:0.7;flex-shrink:0;">
+              <rect x="2" y="2" width="20" height="20" rx="5" stroke="#e8e4dc" stroke-width="1.5"/>
+              <circle cx="12" cy="12" r="4" stroke="#e8e4dc" stroke-width="1.5"/>
+              <circle cx="17.5" cy="6.5" r="1" fill="#e8e4dc"/>
+            </svg>
+            @kaosvintage.online
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-disclaimer">Koleksi vintage band tees original dari era yang tidak bisa diulang.</div>
+      <div class="footer-copy">© 2026 Kaos Vintage</div>
+    </div>
+  </footer>
+
+  <script>
+    // ── MARQUEE BUILD ──
+    const bands = ['OASIS','RADIOHEAD','THE SMITHS','RIDE','DEFTONES','SPIRITUALIZED','BELLE & SEBASTIAN','MAZZY STAR','PORTISHEAD','BLUR','PULP','SPACEMEN 3','MY BLOODY VALENTINE','COCTEAU TWINS','SLOWDIVE'];
+    const track = document.getElementById('marquee-track');
+    const items = [...bands, ...bands]; // duplicate for seamless loop
+    items.forEach(b => {
+      const el = document.createElement('span');
+      el.className = 'marquee-item';
+      el.innerHTML = b + '<span class="dot">·</span>';
+      track.appendChild(el);
+    });
+
+    // ── INTERSECTION OBSERVER FADE-IN ──
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          const siblings = e.target.parentElement.querySelectorAll('.fade-in');
+          let delay = 0;
+          siblings.forEach((s, idx) => {
+            if (s === e.target) delay = idx * 80;
+          });
+          setTimeout(() => e.target.classList.add('visible'), delay);
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // ── NAV SCROLL STYLE ──
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      nav.style.borderBottomColor = window.scrollY > 20
+        ? 'rgba(232,228,220,0.12)'
+        : 'rgba(232,228,220,0.06)';
+    });
+  </script>
+
+</body>
+</html>
